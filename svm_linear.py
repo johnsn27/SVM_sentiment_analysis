@@ -26,17 +26,11 @@ def train_model():
 
     # Perform classification with SVM, kernel=linear
     classifier_linear = svm.SVC(kernel='linear')
-    t0 = time.time()
     classifier_linear.fit(train_vectors, train_data['Label'])
-    t1 = time.time()
     prediction_linear = classifier_linear.predict(test_vectors)
-    t2 = time.time()
-    time_linear_train = t1 - t0
-    time_linear_predict = t2 - t1
 
     # results
     print("Results for SVC(kernel=linear)")
-    print("Training time: %fs; Prediction time: %fs" % (time_linear_train, time_linear_predict))
     report = classification_report(test_data['Label'], prediction_linear, output_dict=True)
     print('positive: ', report['pos'])
     print('negative: ', report['neg'])
