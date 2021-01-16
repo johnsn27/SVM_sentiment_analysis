@@ -16,7 +16,11 @@ classifier = pickle.load(open('models/classifier.sav', 'rb'))
 #  so that we don't have to do train_model() at the start of every run
 #  this will help:
 #  https://stackoverflow.com/questions/46286669/how-to-retrain-logistic-regression-model-in-sklearn-with-new-data
-#  but to do this we will need to pass new data into .fit(newdata, newdata)
+
+# todo this we will need to store current text in a new_data file (d)
+#  pass new data into .partial_fit(newdata, newdata)
+#  append the new_ data file into the train data file
+
 
 @app.route('/sentiment', methods=['GET', 'POST'])
 def sentiment_analysis():
