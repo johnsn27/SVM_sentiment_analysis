@@ -12,14 +12,13 @@ vectorizer = pickle.load(open('models/vectorizer.sav', 'rb'))
 classifier = pickle.load(open('models/classifier.sav', 'rb'))
 
 
-# todo: we want to use some of the model we already have then also incorporate new data we are getting into the model
+# todo: we want to use some of the model we already have
+#  then also incorporate new data we are getting into the model
 #  so that we don't have to do train_model() at the start of every run
 #  this will help:
-#  https://stackoverflow.com/questions/46286669/how-to-retrain-logistic-regression-model-in-sklearn-with-new-data
-
-# todo this we will need to store current text in a new_data file (d)
-#  pass new data into .partial_fit(newdata, newdata)
-#  append the new_ data file into the train data file
+#  https://stackoverflow.com
+#  /questions/46286669/how-to-retrain-logistic-regression-model-in-sklearn-with-new-data
+#  but to do this we will need to pass new data into .fit(newdata, newdata)
 
 
 @app.route('/sentiment', methods=['GET', 'POST'])
@@ -32,8 +31,8 @@ def sentiment_analysis():
             text_vector = vectorizer.transform([text])
             result = classifier.predict(text_vector)
             new_data = text + ", " + result[0] + "\n"
-            with open('document.csv', 'a') as fd:
-                fd.write(new_data)
+            with open('document.csv', 'a') as new_data_document:
+                new_data_document.write(new_data)
             return make_response(jsonify({'sentiment': result[0], 'text': text, 'status_code': 200}), 200)
         return make_response(jsonify({'error': 'sorry! unable to parse', 'status_code': 500}), 500)
 
