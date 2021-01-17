@@ -20,6 +20,7 @@ classifier = pickle.load(open('models/classifier.sav', 'rb'))
 #  /questions/46286669/how-to-retrain-logistic-regression-model-in-sklearn-with-new-data
 #  but to do this we will need to pass new data into .fit(newdata, newdata)
 
+
 @app.route('/sentiment', methods=['GET', 'POST'])
 def sentiment_analysis():
     train_model()
