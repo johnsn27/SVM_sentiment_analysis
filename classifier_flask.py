@@ -1,5 +1,4 @@
 import pickle
-"""Create portable serialized representations of Python objects."""
 
 from flask import Flask, jsonify, make_response, request
 from svm_linear import train_model

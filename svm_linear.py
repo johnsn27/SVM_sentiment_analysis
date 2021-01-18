@@ -1,5 +1,4 @@
 import pickle
-"""Create portable serialized representations of Python objects."""
 
 
 from sklearn.feature_extraction.text import TfidfVectorizer
