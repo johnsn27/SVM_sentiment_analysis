@@ -1,4 +1,7 @@
+# pylint: disable=missing-module-docstring
+
 import pickle
+
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn import svm
@@ -8,6 +11,8 @@ import pandas as pd
 
 
 def train_model():
+    """redundant at this moment in time """
+
     train_data = pd.read_csv("data/train.csv")
 
     test_data = pd.read_csv("data/test.csv")
