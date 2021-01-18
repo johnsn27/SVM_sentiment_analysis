@@ -1,3 +1,4 @@
+# pylint: disable=missing-module-docstring
 import pickle
 
 from flask import Flask, jsonify, make_response, request
