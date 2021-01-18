@@ -1,4 +1,7 @@
 import pickle
+"""
+Create portable serialized representations of Python objects.
+"""
 
 from flask import Flask, jsonify, make_response, request
 from svm_linear import train_model
@@ -21,7 +24,7 @@ classifier = pickle.load(open('models/classifier.sav', 'rb'))
 
 @app.route('/sentiment', methods=['GET', 'POST'])
 def sentiment_analysis():
-    """"docstring example"""
+    """"method that outputs a response"""
     train_model()
     if request.method == 'GET':
         text = 'happy to the point of sadness'
@@ -37,7 +40,9 @@ def sentiment_analysis():
                     jsonify({'sentiment': result[0], 'text': text, 'status_code': 200}), 200)
             )
         return make_response(jsonify({'error': 'sorry! unable to parse', 'status_code': 500}), 500)
-    return make_response(jsonify({'error': 'need to work out what error this should be', 'status_code': 500}), 500)
+    return make_response(
+        jsonify({'error': 'need to work out what error this should be', 'status_code': 500}), 500
+    )
 
 
 if __name__ == '__main__':
