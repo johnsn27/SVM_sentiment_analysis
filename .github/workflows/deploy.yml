@@ -20,7 +20,7 @@ jobs:
     - name: Zip Files
       uses: montudor/action-zip@v0.1.0
       with:
-        args: zip -qq -r ./bundle.zip ./
+        args: zip -qq -r ./repo.zip ./
     - name: AWS Lambda Deploy
       uses: appleboy/lambda-action@v0.0.8
       with:
