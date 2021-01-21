@@ -1,0 +1,11 @@
+{
+    "production": {
+        "app_function": "classifier_flask.app",
+        "aws_region": "eu-west-1",
+        "profile_name": "zappa",
+        "project_name": "svm-sentiment-a",
+        "runtime": "python3.7",
+        "s3_bucket": "zappa-l057go200",
+        "slim_handler": "true"
+    }
+}
