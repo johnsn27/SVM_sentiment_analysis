@@ -13,9 +13,9 @@ import pandas as pd
 def train_model():
     """redundant at this moment in time """
 
-    train_data = pd.read_csv("data/train.csv")
+    train_data = pd.read_csv("../data/train.csv")
 
-    test_data = pd.read_csv("data/test.csv")
+    test_data = pd.read_csv("../data/test.csv")
 
     # Create feature vectors
     vectorizer = TfidfVectorizer(min_df=5,

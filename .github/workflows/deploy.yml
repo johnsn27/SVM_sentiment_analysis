@@ -17,6 +17,11 @@ jobs:
       run:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+    - name: Zip Files
+      uses: papeloto/action-zip@v1
+      with:
+        files: repo/
+        dest: repo.zip
     - name: AWS Lambda Deploy
       uses: appleboy/lambda-action@v0.0.8
       with:
@@ -24,4 +29,4 @@ jobs:
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws_region: ${{ secrets.AWS_REGION }}
         function_name: svm-sentiment
-        zip_file: output.zip
+        zip_file: repo.zip

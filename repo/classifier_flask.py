@@ -3,7 +3,6 @@
 import pickle
 
 from flask import Flask, jsonify, make_response, request
-from svm_linear import train_model
 
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False
@@ -32,7 +31,7 @@ def sentiment_analysis():
             text_vector = vectorizer.transform([text])
             result = classifier.predict(text_vector)
             new_data = text + ", " + result[0] + "\n"
-            with open('document.csv', 'a') as new_data_document:
+            with open('../document.csv', 'a') as new_data_document:
                 new_data_document.write(new_data)
             return (
                 make_response(
