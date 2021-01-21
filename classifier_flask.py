@@ -21,10 +21,10 @@ classifier = pickle.load(open('models/classifier.sav', 'rb'))
 #  but to do this we will need to pass new data into .fit(newdata, newdata)
 
 
-@app.route('/sentiment', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def sentiment_analysis():
     """"method that outputs a response"""
-    train_model()
+    # train_model()
     if request.method == 'GET':
         text = 'happy to the point of sadness'
         print('text', text)
