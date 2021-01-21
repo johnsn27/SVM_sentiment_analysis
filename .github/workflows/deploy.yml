@@ -18,10 +18,9 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
     - name: Zip Files
-      uses: papeloto/action-zip@v1
+      uses: montudor/action-zip@v0.1.0
       with:
-        files: repo/
-        dest: repo.zip
+        args: zip -qq -r ./bundle.zip ./
     - name: AWS Lambda Deploy
       uses: appleboy/lambda-action@v0.0.8
       with:
