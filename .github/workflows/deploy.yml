@@ -19,9 +19,9 @@ jobs:
         pip install -r requirements.txt
     - name: AWS Lambda Deploy
       uses: appleboy/lambda-action@v0.0.8
-        with:
-          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws_region: ${{ secrets.AWS_REGION }}
-          function_name: svm-sentiment
-          zip_file: output.zip
+      with:
+        aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws_region: ${{ secrets.AWS_REGION }}
+        function_name: svm-sentiment
+        zip_file: output.zip
