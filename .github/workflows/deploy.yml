@@ -16,7 +16,7 @@ jobs:
     - name: Install dependencies
       run:
         python venv deployenv
-        source activate deployenv/bin/activate
+        source deployenv/bin/activate
         python -m pip install --upgrade pip
         pip install -r requirements.txt
     - name: Configure AWS Credentials
