@@ -1,4 +1,5 @@
 # pylint: disable=missing-module-docstring
+# pylint: disable=R0801
 
 import pickle
 
@@ -27,12 +28,10 @@ def train_model():
     train_vectors = vectorizer.fit_transform(train_data['Content'])
     test_vectors = vectorizer.transform(test_data['Content'])
 
-    # Perform classification with SVM, kernel=linear
     classifier_linear = RandomForestClassifier(n_estimators=200, random_state=0)
     classifier_linear.fit(train_vectors, train_data['Label'])
     prediction_linear = classifier_linear.predict(test_vectors)
 
-    # results
     print("Results for SVC(kernel=linear)")
     report = classification_report(test_data['Label'], prediction_linear, output_dict=True)
     print('positive: ', report['pos'])
