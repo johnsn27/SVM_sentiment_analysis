@@ -3,7 +3,6 @@
 # need to unduplicate code
 import pickle
 
-
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn import svm
 from sklearn.metrics import classification_report
@@ -42,3 +41,7 @@ def train_model():
 
     pickle.dump(vectorizer, open('models/vectorizer.sav', 'wb'))
     pickle.dump(classifier_linear, open('models/classifier.sav', 'wb'))
+
+
+if __name__ == '__main__':
+    train_model()
