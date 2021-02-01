@@ -13,9 +13,6 @@ import pandas as pd
 def train_model():
     """redundant at this moment in time """
 
-    vectorizer = pickle.load(open('models/vectorizer.sav', 'rb'))
-    classifier = pickle.load(open('models/classifier.sav', 'rb'))
-
     train_data = pd.read_csv("data/train.csv")
 
     test_data = pd.read_csv("data/test.csv")
