@@ -13,7 +13,8 @@ app.config['JSON_AS_ASCII'] = False
 #  then also incorporate new data we are getting into the model
 #  so that we don't have to do train_model() at the start of every run
 #  this will help:
-#  https://stackoverflow.com/questions/46286669/how-to-retrain-logistic-regression-model-in-sklearn-with-new-data
+#  https://stackoverflow.com/questions/46286669/
+#  how-to-retrain-logistic-regression-model-in-sklearn-with-new-data
 #  but to do this we will need to pass new data into .fit(newdata, newdata)
 
 
@@ -25,6 +26,7 @@ def sentiment_analysis():
         retrain_model.start()
         text = 'happy to the point of sadness'
         return fast_response(text)
+    return make_response(jsonify({'error': 'sorry! unable to parse', 'status_code': 500}), 500)
 
 
 if __name__ == '__main__':
