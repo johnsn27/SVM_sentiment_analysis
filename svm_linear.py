@@ -3,7 +3,6 @@
 # need to unduplicate code
 import pickle
 
-
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn import svm
 from sklearn.metrics import classification_report
@@ -13,6 +12,9 @@ import pandas as pd
 
 def train_model():
     """redundant at this moment in time """
+
+    vectorizer = pickle.load(open('models/vectorizer.sav', 'rb'))
+    classifier = pickle.load(open('models/classifier.sav', 'rb'))
 
     train_data = pd.read_csv("data/train.csv")
 
@@ -42,3 +44,7 @@ def train_model():
 
     pickle.dump(vectorizer, open('models/vectorizer.sav', 'wb'))
     pickle.dump(classifier_linear, open('models/classifier.sav', 'wb'))
+
+
+if __name__ == '__main__':
+    train_model()
