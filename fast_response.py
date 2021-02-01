@@ -1,3 +1,5 @@
+# pylint: disable=missing-module-docstring
+# pylint: disable=missing-function-docstring
 import pickle
 from flask import jsonify, make_response
 
@@ -16,4 +18,3 @@ def fast_response(text):
                 jsonify({'sentiment': result[0], 'text': text, 'status_code': 200}), 200)
         )
     return make_response(jsonify({'error': 'sorry! unable to parse', 'status_code': 500}), 500)
-
