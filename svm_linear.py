@@ -6,7 +6,7 @@ import pickle
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn import svm
 from sklearn.metrics import classification_report
-
+from svm_visualisation import plot_coefficients
 import pandas as pd
 
 
@@ -38,6 +38,8 @@ def train_model():
     report = classification_report(test_data['Label'], prediction_linear, output_dict=True)
     print('positive: ', report['pos'])
     print('negative: ', report['neg'])
+    # classifier.coef_.ravel()
+    plot_coefficients(classifier_linear, vectorizer.get_feature_names())
 
     pickle.dump(vectorizer, open('models/vectorizer.sav', 'wb'))
     pickle.dump(classifier_linear, open('models/classifier.sav', 'wb'))
