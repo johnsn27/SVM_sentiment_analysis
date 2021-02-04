@@ -1,6 +1,6 @@
-import requests
 from bs4 import BeautifulSoup as bs
 from csv import reader
+import requests
 import time
 
 
