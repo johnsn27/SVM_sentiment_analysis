@@ -19,7 +19,7 @@ jobs:
         pip install -r requirements.txt
     - name: Analysing the code with pylint
       run: |
-        pylint `find -regextype egrep -regex '(.*.py)$'`
+        pylint --fail-under=10 `find -regextype egrep -regex '(.*.py)$'`
     - name: Upload pylint.txt as artifact
       uses: actions/upload-artifact@v2
       with:
