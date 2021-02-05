@@ -10,6 +10,7 @@ from gather_data.new_articles import read_csv
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False
 
+
 # todo: we want to use some of the model we already have
 #  then also incorporate new data we are getting into the model
 #  so that we don't have to do train_model() at the start of every run
@@ -29,9 +30,11 @@ def sentiment_analysis():
         return fast_response(text)
     return make_response(jsonify({'error': 'sorry! unable to parse', 'status_code': 500}), 500)
 
+
 @app.route('/gather_data', methods=['GET', 'POST'])
 def gather_data():
     read_csv()
+
 
 if __name__ == '__main__':
     app.run()
