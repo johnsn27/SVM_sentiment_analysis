@@ -1,3 +1,5 @@
+# pylint: disable=missing-module-docstring
+# pylint: disable=W0511
 import time
 from csv import reader
 
@@ -28,12 +30,12 @@ def read_csv():
                 url = "https://www.bbc.co.uk" + row[1]
                 try:
                     parsed = BBC(url)
-                    parsedStr = str(parsed.body[1:-3])
-                    parsedBody = parsedStr[2:-2]
-                    f = open("bbcArticles.txt", "a")
-                    if parsedBody:
-                        f.write('\n' + parsedBody)
-                    f.close()
+                    parsed_str = str(parsed.body[1:-3])
+                    parsed_body = parsed_str[2:-2]
+                    file = open("bbcArticles.txt", "a")
+                    if parsed_body:
+                        file.write('\n' + parsed_body)
+                    file.close()
                     time.sleep(1.1)
                 except:
                     pass
