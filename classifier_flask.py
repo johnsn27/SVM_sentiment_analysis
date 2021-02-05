@@ -1,5 +1,6 @@
 # pylint: disable=missing-module-docstring
 # pylint: disable=W0511
+# pylint: disable=E0401
 from threading import Thread
 
 from flask import Flask, jsonify, make_response, request
