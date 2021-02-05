@@ -12,6 +12,7 @@ class BBCArticle:
         article = requests.get(url)
         self.soup = bs(article.content, "html.parser")
         self.body = self.get_body()
+        self.headline = self.get_headline()
 
     def get_body(self) -> list:
         body = self.soup.find("article")
