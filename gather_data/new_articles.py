@@ -1,12 +1,10 @@
 # pylint: disable=missing-module-docstring
-# pylint: disable=W0511
 import time
 from csv import reader
 
+import os
 import requests
 from bs4 import BeautifulSoup as bs
-
-import os
 
 
 class BBCArticle:
