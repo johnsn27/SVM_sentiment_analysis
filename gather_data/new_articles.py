@@ -30,9 +30,11 @@ def read_csv():
                 url = "https://www.bbc.co.uk" + row[1]
                 write_csv(url)
             i += 1
+            time.sleep(1.1)
 
 
 def write_csv(url):
+    """write text of article to bbcArticles.txt file"""
     try:
         parsed = BBC(url)
         parsed_str = str(parsed.body[1:-3])
@@ -41,7 +43,6 @@ def write_csv(url):
         if parsed_body:
             file.write('\n' + parsed_body)
         file.close()
-        time.sleep(1.1)
     except:
         pass
 
