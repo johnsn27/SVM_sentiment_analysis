@@ -7,7 +7,7 @@ import requests
 from bs4 import BeautifulSoup as bs
 
 
-class BBC:
+class BBCArticle:
     def __init__(self, url: str):
         article = requests.get(url)
         self.soup = bs(article.content, "html.parser")
@@ -16,6 +16,10 @@ class BBC:
     def get_body(self) -> list:
         body = self.soup.find("article")
         return [p.text for p in body.find_all("p")]
+
+    def get_headline(self) -> list:
+        body = self.soup.find("article")
+        return [p.text for p in body.find_all("h1")]
 
 
 def read_csv():
@@ -29,22 +33,19 @@ def read_csv():
             if i > 2500:
                 url = "https://www.bbc.co.uk" + row[1]
                 write_csv(url)
+                time.sleep(1.1)
             i += 1
-            time.sleep(1.1)
 
 
 def write_csv(url):
     """write text of article to bbcArticles.txt file"""
-    try:
-        parsed = BBC(url)
-        parsed_str = str(parsed.body[1:-3])
-        parsed_body = parsed_str[2:-2]
-        file = open("bbcArticles.txt", "a")
-        if parsed_body:
-            file.write('\n' + parsed_body)
-        file.close()
-    except:
-        pass
+    parsed = BBCArticle(url)
+    parsed_str = str(parsed.body[1:-3])
+    parsed_body = parsed_str[2:-2]
+    file = open("bbcArticles.txt", "a")
+    if parsed_body:
+        file.write('\n' + parsed_body)
+    file.close()
 
 
 if __name__ == '__main__':
