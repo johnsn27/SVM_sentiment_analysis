@@ -1,5 +1,4 @@
 # pylint: disable=missing-module-docstring
-# pylint: disable=R0801
 # need to unduplicate code
 import pickle
 

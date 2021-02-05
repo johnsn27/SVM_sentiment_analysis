@@ -1,4 +1,3 @@
-# pylint: disable=missing-module-docstring
 import time
 from csv import reader
 
