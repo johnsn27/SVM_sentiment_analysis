@@ -6,9 +6,12 @@ from csv import reader
 import requests
 from bs4 import BeautifulSoup as bs
 
+import os
+
 
 class BBCArticle:
     """Class used to represent a BBC Article"""
+
     def __init__(self, url: str):
         article = requests.get(url)
         self.soup = bs(article.content, "html.parser")
@@ -28,7 +31,8 @@ class BBCArticle:
 
 def read_csv():
     """read the url from the published article csv """
-    with open('news_2019-07.csv', 'r') as read_obj:
+    file_path = os.path.abspath("news_csv_files/news_2019-07.csv")
+    with open(file_path, 'r') as read_obj:
         csv_reader = reader(read_obj)
         i = 0
         for row in csv_reader:
@@ -46,7 +50,8 @@ def write_csv(url):
     parsed = BBCArticle(url)
     parsed_str = str(parsed.body[1:-3])
     parsed_body = parsed_str[2:-2]
-    file = open("bbcArticles.txt", "a")
+    file_path = os.path.abspath("datasets/bbcArticles.txt")
+    file = open(file_path, "a")
     if parsed_body:
         file.write('\n' + parsed_body)
     file.close()
