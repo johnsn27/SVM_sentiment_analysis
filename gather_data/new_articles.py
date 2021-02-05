@@ -8,6 +8,7 @@ from bs4 import BeautifulSoup as bs
 
 
 class BBCArticle:
+    """Class used to represent a BBC Article"""
     def __init__(self, url: str):
         article = requests.get(url)
         self.soup = bs(article.content, "html.parser")
