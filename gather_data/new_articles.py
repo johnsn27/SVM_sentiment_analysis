@@ -15,10 +15,12 @@ class BBCArticle:
         self.headline = self.get_headline()
 
     def get_body(self) -> list:
+        """returns a list of the paragraphs in an article"""
         body = self.soup.find("article")
         return [p.text for p in body.find_all("p")]
 
     def get_headline(self) -> list:
+        """returns a list of the headlines in an article"""
         body = self.soup.find("article")
         return [p.text for p in body.find_all("h1")]
 
