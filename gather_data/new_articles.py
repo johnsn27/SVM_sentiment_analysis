@@ -28,29 +28,31 @@ class BBCArticle:
 
 def read_csv():
     """read the url from the published article csv """
-    file_path = os.path.abspath("news_csv_files/news_2019-07.csv")
+    file_path = os.path.abspath("../news_csv_files/news_2019-07.csv")
     with open(file_path, 'r') as read_obj:
         csv_reader = reader(read_obj)
         i = 0
         for row in csv_reader:
-            if i > 3000:
+            if i > 2501:
                 break
             if i > 2500:
-                url = "https://www.bbc.co.uk" + row[1]
-                write_csv(url)
+                write_csv(row)
                 time.sleep(1.1)
             i += 1
 
 
-def write_csv(url):
+def write_csv(row):
     """write text of article to bbcArticles.txt file"""
+    url_without_id = row[1].rsplit("-", 1)[0]
+    topic = url_without_id.split("/")[2]
+    url = "https://www.bbc.co.uk" + row[1]
     parsed = BBCArticle(url)
     parsed_str = str(parsed.body[1:-3])
     parsed_body = parsed_str[2:-2]
-    file_path = os.path.abspath("datasets/bbcArticles.txt")
+    file_path = os.path.abspath("../datasets/testArticles.txt")
     file = open(file_path, "a")
     if parsed_body:
-        file.write('\n' + parsed_body)
+        file.write('\n' + topic + ', ' + parsed_body)
     file.close()
 
 
