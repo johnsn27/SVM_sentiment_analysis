@@ -1,4 +1,3 @@
-# pylint: disable=missing-module-docstring
 import time
 from csv import reader
 
@@ -28,7 +27,7 @@ class BBCArticle:
 
 
 def read_csv():
-    """read the url from the published article csv """
+    """read the url from the published article csv"""
     file_path = os.path.abspath("news_csv_files/news_2019-07.csv")
     with open(file_path, 'r') as read_obj:
         csv_reader = reader(read_obj)
