@@ -37,8 +37,6 @@ def train_model():
     report = classification_report(test_data['Label'], prediction_linear, output_dict=True)
     print('positive: ', report['pos'])
     print('negative: ', report['neg'])
-    # classifier.coef_.ravel()
-    plot_coefficients(classifier_linear, vectorizer.get_feature_names())
 
     pickle.dump(vectorizer, open('models/vectorizer.sav', 'wb'))
     pickle.dump(classifier_linear, open('models/classifier.sav', 'wb'))
