@@ -1,5 +1,3 @@
-# pylint: disable=missing-module-docstring
-# pylint: disable=missing-function-docstring
 import pickle
 from flask import jsonify, make_response
 
