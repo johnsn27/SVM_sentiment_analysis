@@ -33,6 +33,7 @@ def sentiment_analysis():
 
 @app.route('/gather_data', methods=['GET', 'POST'])
 def gather_data():
+    """"method that outputs a response"""
     read_csv()
 
 
