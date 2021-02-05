@@ -15,5 +15,4 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
       - name: Run tests with pytest
-        run: python -m pylint --fail-under=10 `find -regextype egrep -regex '(.*.py)$'` |
-          tee pylint.txt
+        run: pytest
