@@ -19,6 +19,7 @@ class BBC:
 
 
 def read_csv():
+    """read the url from the published article csv """
     with open('news_2019-07.csv', 'r') as read_obj:
         csv_reader = reader(read_obj)
         i = 0
@@ -26,20 +27,23 @@ def read_csv():
             if i > 3000:
                 break
             if i > 2500:
-                print(str(i) + " " + 'https://www.bbc.co.uk' + row[1])
                 url = "https://www.bbc.co.uk" + row[1]
-                try:
-                    parsed = BBC(url)
-                    parsed_str = str(parsed.body[1:-3])
-                    parsed_body = parsed_str[2:-2]
-                    file = open("bbcArticles.txt", "a")
-                    if parsed_body:
-                        file.write('\n' + parsed_body)
-                    file.close()
-                    time.sleep(1.1)
-                except:
-                    pass
+                write_csv(url)
             i += 1
+
+
+def write_csv(url):
+    try:
+        parsed = BBC(url)
+        parsed_str = str(parsed.body[1:-3])
+        parsed_body = parsed_str[2:-2]
+        file = open("bbcArticles.txt", "a")
+        if parsed_body:
+            file.write('\n' + parsed_body)
+        file.close()
+        time.sleep(1.1)
+    except:
+        pass
 
 
 if __name__ == '__main__':
