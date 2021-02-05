@@ -1,7 +1,8 @@
-from bs4 import BeautifulSoup as bs
-from csv import reader
-import requests
 import time
+from csv import reader
+
+import requests
+from bs4 import BeautifulSoup as bs
 
 
 class BBC:
