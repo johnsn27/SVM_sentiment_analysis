@@ -1,5 +1,5 @@
 import time
-from csv import reader
+from csv import reader, writer, QUOTE_MINIMAL
 
 import os
 import requests
@@ -45,15 +45,22 @@ def write_csv(row):
     """write text of article to bbcArticles.txt file"""
     url_without_id = row[1].rsplit("-", 1)[0]
     topic = url_without_id.split("/")[2]
+    print('topic', topic)
     url = "https://www.bbc.co.uk" + row[1]
     parsed = BBCArticle(url)
-    parsed_str = str(parsed.body[1:-3])
-    parsed_body = parsed_str[2:-2]
-    file_path = os.path.abspath("../datasets/testArticles.txt")
-    file = open(file_path, "a")
-    if parsed_body:
-        file.write('\n' + topic + ', ' + parsed_body)
-    file.close()
+    paragraph1 = clean(str(parsed.body[2]))
+    paragraph2 = clean(str(parsed.body[3]))
+    paragraph3 = clean(str(parsed.body[4]))
+    paragraph4 = clean(str(parsed.body[5]))
+    rest_of_article = str(parsed.body[6:-3])
+    file_path = os.path.abspath("../datasets/testArticles.csv")
+    with open(file_path, mode='a') as articles_dataset:
+        articles_writer = writer(articles_dataset, delimiter=',')
+        articles_writer.writerow([topic, paragraph1, paragraph2, paragraph3, paragraph4, rest_of_article])
+
+
+def clean(str_to_clean):
+    return str_to_clean.translate({ord(char): None for char in '"'})
 
 
 if __name__ == '__main__':
