@@ -42,15 +42,18 @@ def read_csv():
             i += 1
 
 
-def write_csv(url):
+def write_csv(row):
     """write text of article to bbcArticles.txt file"""
+    url_without_id = row[1].rsplit("-", 1)[0]
+    topic = url_without_id.split("/")[2]
+    url = "https://www.bbc.co.uk" + row[1]
     parsed = BBCArticle(url)
     parsed_str = str(parsed.body[1:-3])
     parsed_body = parsed_str[2:-2]
-    file_path = os.path.abspath("datasets/testArticles.csv")
+    file_path = os.path.abspath("../datasets/testArticles.txt")
     file = open(file_path, "a")
     if parsed_body:
-        file.write('\n' + parsed_body)
+        file.write('\n' + topic + ', ' + parsed_body)
     file.close()
 
 

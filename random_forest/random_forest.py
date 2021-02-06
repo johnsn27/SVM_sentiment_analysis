@@ -1,6 +1,3 @@
-# pylint: disable=missing-module-docstring
-# pylint: disable=R0801
-
 import pickle
 
 from sklearn.feature_extraction.text import TfidfVectorizer

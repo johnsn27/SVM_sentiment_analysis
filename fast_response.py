@@ -1,10 +1,9 @@
-# pylint: disable=missing-module-docstring
-# pylint: disable=missing-function-docstring
 import pickle
 from flask import jsonify, make_response
 
 
 def fast_response(text):
+    """load a response from the saved trained model"""
     vectorizer = pickle.load(open('models/vectorizer.sav', 'rb'))
     classifier = pickle.load(open('models/classifier.sav', 'rb'))
     if text:
