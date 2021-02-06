@@ -27,7 +27,7 @@ class BBCArticle:
 
 
 def read_csv():
-    """read the url from the published article csv """
+    """read the url from the published article csv"""
     file_path = os.path.abspath("../news_csv_files/news_2019-07.csv")
     with open(file_path, 'r') as read_obj:
         csv_reader = reader(read_obj)
@@ -47,17 +47,34 @@ def write_csv(row):
     topic = url_without_id.split("/")[2]
     print('topic', topic)
     url = "https://www.bbc.co.uk" + row[1]
-    parsed = BBCArticle(url)
-    paragraph1 = clean(str(parsed.body[2]))
-    paragraph2 = clean(str(parsed.body[3]))
-    paragraph3 = clean(str(parsed.body[4]))
-    paragraph4 = clean(str(parsed.body[5]))
-    rest_of_article = str(parsed.body[6:-3])
+    bbc_article = BBCArticle(url)
+    bbc_article_body = bbc_article.body
+    paragraphs = get_paragraphs(bbc_article_body)
+    rest_of_article = get_rest_of_article(bbc_article)
     file_path = os.path.abspath("../datasets/testArticles.csv")
     with open(file_path, mode='a') as articles_dataset:
         articles_writer = writer(articles_dataset, delimiter=',')
-        article = [topic, paragraph1, paragraph2, paragraph3, paragraph4, rest_of_article]
+        article = [topic,
+                   paragraphs[0], paragraphs[1], paragraphs[2], paragraphs[3],
+                   rest_of_article]
         articles_writer.writerow(article)
+
+
+def get_rest_of_article(bbc_article):
+    """gets the text of the rest of the article"""
+    rest_of_article = str(bbc_article.body[6:-3])
+    clean_rest_of_article = clean(rest_of_article)
+    return clean_rest_of_article
+
+
+def get_paragraphs(bbc_article):
+    """gets the first 4 paragraphs of the article"""
+    paragraph1 = clean(str(bbc_article[2]))
+    paragraph2 = clean(str(bbc_article[3]))
+    paragraph3 = clean(str(bbc_article[4]))
+    paragraph4 = clean(str(bbc_article[5]))
+    paragraphs = paragraph1, paragraph2, paragraph3, paragraph4
+    return paragraphs
 
 
 def clean(str_to_clean):
