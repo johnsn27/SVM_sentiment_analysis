@@ -9,3 +9,4 @@ def read_csv():
     file_path = os.path.abspath("datasets/bbcArticles.txt")
     with open(file_path, 'r') as read_obj:
         csv_reader = reader(read_obj)
+        # for row in csv_reader:

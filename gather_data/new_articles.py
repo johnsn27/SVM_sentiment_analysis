@@ -47,7 +47,7 @@ def write_csv(url):
     parsed = BBCArticle(url)
     parsed_str = str(parsed.body[1:-3])
     parsed_body = parsed_str[2:-2]
-    file_path = os.path.abspath("datasets/bbcArticles.txt")
+    file_path = os.path.abspath("datasets/testArticles.csv")
     file = open(file_path, "a")
     if parsed_body:
         file.write('\n' + parsed_body)
