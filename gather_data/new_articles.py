@@ -1,5 +1,5 @@
 import time
-from csv import reader, writer, QUOTE_MINIMAL
+from csv import reader, writer
 
 import os
 import requests
@@ -56,10 +56,12 @@ def write_csv(row):
     file_path = os.path.abspath("../datasets/testArticles.csv")
     with open(file_path, mode='a') as articles_dataset:
         articles_writer = writer(articles_dataset, delimiter=',')
-        articles_writer.writerow([topic, paragraph1, paragraph2, paragraph3, paragraph4, rest_of_article])
+        article = [topic, paragraph1, paragraph2, paragraph3, paragraph4, rest_of_article]
+        articles_writer.writerow(article)
 
 
 def clean(str_to_clean):
+    """removes the " character from a string """
     return str_to_clean.translate({ord(char): None for char in '"'})
 
 
