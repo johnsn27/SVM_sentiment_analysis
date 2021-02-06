@@ -12,17 +12,27 @@ class Clean(unittest.TestCase):
 
         self.assertEqual(result, expectation)
 
-    def test_get_paragraphs(self):
+    def test_get_paragraphs_length(self):
         """test that get_paragraphs gets 4 paragraphs"""
-        with open('mock_article') as file:
-            bbc_article = file.readline()
 
-        formatted_bbc_article = bbc_article.split('\', \'')
+        bbc_article = ["reporter", "reporter info", "p1", "p2", "p3", "p4", "p5"]
 
-        result = len(get_paragraphs(formatted_bbc_article))
+        result = len(get_paragraphs(bbc_article))
         expectation = 4
 
         self.assertEqual(result, expectation)
+
+    def test_get_paragraphs_length(self):
+        """test that get_paragraphs gets the first 4 paragraphs of an article"""
+        bbc_article = ["reporter", "reporter info", "p1", "p2", "p3", "p4", "p5"]
+
+        result = get_paragraphs(bbc_article)
+        expectation = ["p1", "p2", "p3", "p4"]
+
+        self.assertEqual(result[0], expectation[0])
+        self.assertEqual(result[1], expectation[1])
+        self.assertEqual(result[2], expectation[2])
+        self.assertEqual(result[3], expectation[3])
 
 
 if __name__ == '__main__':
