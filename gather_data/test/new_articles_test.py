@@ -22,7 +22,7 @@ class Clean(unittest.TestCase):
 
         self.assertEqual(result, expectation)
 
-    def test_get_paragraphs_length(self):
+    def test_get_4_paragraphs_text(self):
         """test that get_paragraphs gets the first 4 paragraphs of an article"""
         bbc_article = ["reporter", "reporter info", "p1", "p2", "p3", "p4", "p5"]
 
