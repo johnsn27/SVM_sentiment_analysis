@@ -3,6 +3,7 @@ from ..new_articles import clean, get_paragraphs, get_rest_of_article
 
 
 class TestBBCArticle(unittest.TestCase):
+    """tests the methods within new_articles file"""
     def test_clean(self):
         """test that the clean function removes " from a string"""
         str_to_clean = "\"test\""
