@@ -31,9 +31,15 @@ def read_csv(path="../news_csv_files/news_2019-07.csv"):
     file_path = os.path.abspath(path)
     with open(file_path, 'r') as read_obj:
         csv_reader = reader(read_obj)
+        i = 0
         for row in csv_reader:
-            write_csv(row)
-            time.sleep(1.1)
+            print(row)
+            if i < 5:
+                write_csv(row)
+                time.sleep(1.1)
+                i += 1
+            else:
+                break
 
 
 def write_csv(row):
@@ -43,15 +49,16 @@ def write_csv(row):
     url = "https://www.bbc.co.uk" + row[1]
     bbc_article = BBCArticle(url)
     bbc_article_body = bbc_article.body
-    paragraphs = get_paragraphs(bbc_article_body)
-    rest_of_article = get_rest_of_article(bbc_article_body)
-    file_path = os.path.abspath("../datasets/testArticles.csv")
-    with open(file_path, mode='a') as articles_dataset:
-        articles_writer = writer(articles_dataset, delimiter=',')
-        article = [topic,
-                   paragraphs[0], paragraphs[1], paragraphs[2], paragraphs[3],
-                   rest_of_article]
-        articles_writer.writerow(article)
+    if len(bbc_article_body) > 5:
+        paragraphs = get_paragraphs(bbc_article_body)
+        rest_of_article = get_rest_of_article(bbc_article_body)
+        file_path = os.path.abspath("../datasets/bbcArticles.csv")
+        with open(file_path, mode='a') as articles_dataset:
+            articles_writer = writer(articles_dataset, delimiter=',')
+            article = [topic,
+                       paragraphs[0], paragraphs[1], paragraphs[2], paragraphs[3],
+                       rest_of_article]
+            articles_writer.writerow(article)
 
 
 def get_rest_of_article(bbc_article):
