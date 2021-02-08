@@ -1,5 +1,5 @@
 # pylint: disable=missing-module-docstring#
-# pylint: R0801
+# Remove R0801 from .pylintrc
 # need to unduplicate code
 import pickle
 
