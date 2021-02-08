@@ -35,7 +35,7 @@ class TestBBCArticle(unittest.TestCase):
         self.assertEqual(result[3], expectation[3])
 
     def test_get_rest_of_article(self):
-        """test that get_paragraphs gets the first 4 paragraphs of an article"""
+        """test that get_rest_of_article gets the text of the paragraphs after the first 4"""
         bbc_article = ["reporter", "reporter info", "p1", "p2", "p3", "p4",
                        "roa p5", "roa p6", "roa p7",
                        "related topics", "more on this story", "related articles"]

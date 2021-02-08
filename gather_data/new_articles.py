@@ -26,19 +26,14 @@ class BBCArticle:
         return [p.text for p in body.find_all("h1")]
 
 
-def read_csv():
+def read_csv(path="../news_csv_files/news_2019-07.csv"):
     """read the url from the published article csv"""
-    file_path = os.path.abspath("../news_csv_files/news_2019-07.csv")
+    file_path = os.path.abspath(path)
     with open(file_path, 'r') as read_obj:
         csv_reader = reader(read_obj)
-        i = 0
         for row in csv_reader:
-            if i > 2501:
-                break
-            if i > 2500:
-                write_csv(row)
-                time.sleep(1.1)
-            i += 1
+            write_csv(row)
+            time.sleep(1.1)
 
 
 def write_csv(row):
