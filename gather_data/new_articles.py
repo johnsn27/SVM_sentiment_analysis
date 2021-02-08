@@ -40,7 +40,6 @@ def write_csv(row):
     """write text of article to bbcArticles.txt file"""
     url_without_id = row[1].rsplit("-", 1)[0]
     topic = url_without_id.split("/")[2]
-    print('topic', topic)
     url = "https://www.bbc.co.uk" + row[1]
     bbc_article = BBCArticle(url)
     bbc_article_body = bbc_article.body
