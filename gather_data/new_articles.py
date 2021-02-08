@@ -50,7 +50,7 @@ def write_csv(row):
     bbc_article = BBCArticle(url)
     bbc_article_body = bbc_article.body
     paragraphs = get_paragraphs(bbc_article_body)
-    rest_of_article = get_rest_of_article(bbc_article)
+    rest_of_article = get_rest_of_article(bbc_article_body)
     file_path = os.path.abspath("../datasets/testArticles.csv")
     with open(file_path, mode='a') as articles_dataset:
         articles_writer = writer(articles_dataset, delimiter=',')
@@ -62,7 +62,7 @@ def write_csv(row):
 
 def get_rest_of_article(bbc_article):
     """gets the text of the rest of the article"""
-    rest_of_article = str(bbc_article.body[6:-3])
+    rest_of_article = str(bbc_article[6:-3])
     clean_rest_of_article = clean(rest_of_article)
     return clean_rest_of_article
 
