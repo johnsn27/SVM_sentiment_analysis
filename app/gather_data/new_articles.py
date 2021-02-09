@@ -34,7 +34,6 @@ def read_csv(path="../news_csv_files/news_2019-07.csv"):
         for row in csv_reader:
             write_csv(row)
             time.sleep(1.1)
-            i += 1
 
 
 def write_csv(row):
