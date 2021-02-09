@@ -17,10 +17,10 @@ def sentiment_analysis():
     return make_response(jsonify({'error': 'sorry! unable to parse', 'status_code': 500}), 500)
 
 
-@app.route('/gather_data', methods=['GET', 'POST'])
-def gather_data():
-    """"method that outputs a response"""
-    read_csv()
+# @app.route('/gather_data', methods=['GET', 'POST'])
+# def gather_data():
+#     """"method that outputs a response"""
+#     read_csv()
 
 
 if __name__ == '__main__':
