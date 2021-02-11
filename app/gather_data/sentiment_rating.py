@@ -1,22 +1,33 @@
+import os
+
 from csv import reader, writer
 from app.fast_response_sentiment import fast_response_sentiment
 
-import os
-
 
 class ArticleWithSentiment:
+    """A class to represent an article with a sentiment rating
+    
+    Attributes:
+        sentiment: sentiment rating for an article
+        topic: topic of article
+        text: full text of article
+    """
     def __init__(self, sentiment, topic, text):
+        """"Inits ArticleWithSentiment class with the sentiment, topic and text"""
         self.sentiment = sentiment
         self.topic = topic
         self.text = text
 
     def get_sentiment(self):
+        """returns the sentiment of a given article"""
         return self.sentiment
 
     def get_topic(self):
+        """returns the topic of a given article"""
         return self.topic
 
     def get_text(self):
+        """returns the text of a given article"""
         return self.text
 
 
