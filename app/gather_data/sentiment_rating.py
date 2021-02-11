@@ -10,8 +10,14 @@ class ArticleWithSentiment:
         self.topic = topic
         self.text = text
 
-    def print_sentiment(self):
-        print("My sentiment is: " + self.sentiment)
+    def get_sentiment(self):
+        return self.sentiment
+
+    def get_topic(self):
+        return self.topic
+
+    def get_text(self):
+        return self.text
 
 
 def get_article_text(path="app/datasets/testArticles.csv"):
