@@ -1,6 +1,4 @@
 import pickle
-from flask import jsonify, make_response
-
 
 def fast_response_sentiment(text):
     """load a response from the saved trained model"""
