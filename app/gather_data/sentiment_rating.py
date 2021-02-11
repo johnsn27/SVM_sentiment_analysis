@@ -35,18 +35,15 @@ def get_article_text(path="app/datasets/testArticles.csv"):
     """returns the text of an article"""
     file_path = os.path.abspath(path)
     with open(file_path, 'r') as read_obj:
-        i = 0
         csv_reader = reader(read_obj)
         for row in csv_reader:
-            if i > 0:
-                p1 = row[1]
-                p2 = row[2]
-                p3 = row[3]
-                p4 = row[4]
-                p5 = row[5]
-                whole_article = p1 + p2 + p3 + p4 + p5
-                return whole_article
-            i += 1
+            paragraph1 = row[1]
+            paragraph2 = row[2]
+            paragraph3 = row[3]
+            paragraph4 = row[4]
+            paragraph5 = row[5]
+            whole_article = paragraph1 + paragraph2 + paragraph3 + paragraph4 + paragraph5
+            return whole_article
 
 
 def article_url(path="app/datasets/testArticles.csv"):
