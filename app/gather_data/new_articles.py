@@ -43,15 +43,16 @@ def write_csv(row):
     url = "https://www.bbc.co.uk" + row[1]
     bbc_article = BBCArticle(url)
     bbc_article_body = bbc_article.body
-    paragraphs = get_paragraphs(bbc_article_body)
-    rest_of_article = get_rest_of_article(bbc_article_body)
-    file_path = os.path.abspath("../datasets/testArticles.csv")
-    with open(file_path, mode='a') as articles_dataset:
-        articles_writer = writer(articles_dataset, delimiter=',')
-        article = [topic,
-                   paragraphs[0], paragraphs[1], paragraphs[2], paragraphs[3],
-                   rest_of_article]
-        articles_writer.writerow(article)
+    if len(bbc_article_body) > 5:
+        paragraphs = get_paragraphs(bbc_article_body)
+        rest_of_article = get_rest_of_article(bbc_article_body)
+        file_path = os.path.abspath("../datasets/testArticles.csv")
+        with open(file_path, mode='a') as articles_dataset:
+            articles_writer = writer(articles_dataset, delimiter=',')
+            article = [topic,
+                       paragraphs[0], paragraphs[1], paragraphs[2], paragraphs[3],
+                       rest_of_article]
+            articles_writer.writerow(article)
 
 
 def get_rest_of_article(bbc_article):
