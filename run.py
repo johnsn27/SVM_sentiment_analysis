@@ -2,8 +2,9 @@ from threading import Thread
 
 from flask import Flask, jsonify, make_response, request
 from app.fast_response import fast_response
-from app.gather_data.new_articles import read_csv
+# from app.gather_data.new_articles import read_csv
 from app.svm_linear import train_model
+from app.gather_data.sentiment_rating import write_to_dataset
 
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False
@@ -23,7 +24,7 @@ def sentiment_analysis():
 @app.route('/gather_data', methods=['GET', 'POST'])
 def gather_data():
     """"method that outputs a response"""
-    read_csv()
+    write_to_dataset()
 
 
 if __name__ == '__main__':
