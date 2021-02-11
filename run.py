@@ -2,8 +2,9 @@ from threading import Thread
 
 from flask import Flask, jsonify, make_response, request
 from app.fast_response import fast_response
-from app.gather_data.new_articles import read_csv
+# from app.gather_data.new_articles import read_csv
 from app.svm_linear import train_model
+from app.gather_data.sentiment_rating import read_csv
 
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False
