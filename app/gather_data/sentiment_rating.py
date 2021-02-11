@@ -6,7 +6,7 @@ from app.fast_response_sentiment import fast_response_sentiment
 
 class ArticleWithSentiment:
     """A class to represent an article with a sentiment rating
-    
+
     Attributes:
         sentiment: sentiment rating for an article
         topic: topic of article
@@ -35,9 +35,18 @@ def get_article_text(path="app/datasets/testArticles.csv"):
     """returns the text of an article"""
     file_path = os.path.abspath(path)
     with open(file_path, 'r') as read_obj:
+        i = 0
         csv_reader = reader(read_obj)
         for row in csv_reader:
-            return row[0]
+            if i > 0:
+                p1 = row[1]
+                p2 = row[2]
+                p3 = row[3]
+                p4 = row[4]
+                p5 = row[5]
+                whole_article = p1 + p2 + p3 + p4 + p5
+                return whole_article
+            i += 1
 
 
 def article_url(path="app/datasets/testArticles.csv"):
@@ -52,9 +61,9 @@ def article_url(path="app/datasets/testArticles.csv"):
 
 def create_article_with_sentiment():
     """read the url from the published article csv"""
-    sentiment = fast_response_sentiment("text")
     url = article_url()
     text = get_article_text()
+    sentiment = fast_response_sentiment(text)
     article_with_sentiment = ArticleWithSentiment(sentiment, url, text)
     return article_with_sentiment
 
@@ -64,6 +73,8 @@ def write_to_dataset(path="app/datasets/bbc_articles_with_sentiment.csv"):
     article_with_sentiment = create_article_with_sentiment()
     with open(path, mode='a') as articles_with_sentiment_dataset:
         articles_writer = writer(articles_with_sentiment_dataset, delimiter=',')
-        row = article_with_sentiment.sentiment, article_with_sentiment.topic, article_with_sentiment.text
+        row = [article_with_sentiment.sentiment,
+               article_with_sentiment.topic,
+               article_with_sentiment.text]
         print('article_with_sentiment.sentiment', article_with_sentiment.sentiment)
         articles_writer.writerow(row)
