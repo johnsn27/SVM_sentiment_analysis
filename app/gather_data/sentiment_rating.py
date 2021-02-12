@@ -1,6 +1,7 @@
 import os
 
 from csv import reader, writer
+from flask import jsonify, make_response
 from app.fast_response_sentiment import fast_response_sentiment
 
 
@@ -41,8 +42,8 @@ def get_article_text(path="app/datasets/testArticles.csv"):
             paragraph2 = row[2]
             paragraph3 = row[3]
             paragraph4 = row[4]
-            paragraph5 = row[5]
-            whole_article = paragraph1 + paragraph2 + paragraph3 + paragraph4 + paragraph5
+            rest_of_article = row[5]
+            whole_article = paragraph1 + paragraph2 + paragraph3 + paragraph4 + rest_of_article
             return whole_article
 
 
@@ -75,3 +76,5 @@ def write_to_dataset(path="app/datasets/bbc_articles_with_sentiment.csv"):
                article_with_sentiment.text]
         print('article_with_sentiment.sentiment', article_with_sentiment.sentiment)
         articles_writer.writerow(row)
+    return make_response(
+                jsonify({'status_code': 200}), 200)
