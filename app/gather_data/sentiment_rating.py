@@ -1,7 +1,7 @@
 import os
 
-from flask import jsonify, make_response
 from csv import reader, writer
+from flask import jsonify, make_response
 from app.fast_response_sentiment import fast_response_sentiment
 
 
