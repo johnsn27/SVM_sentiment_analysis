@@ -26,6 +26,8 @@ print(imdb.info())
 print(imdb.shape)
 print(imdb.head(10))
 
+
+# Creates pie chart of positive vs negative
 # imdb['label'].value_counts().plot.pie(figsize=(6, 6), title="Distribution of reviews per sentiment", labels=['', ''],
 #                                       autopct='%1.1f%%')
 # labels = ["Positive", "Negative"]
@@ -59,7 +61,6 @@ print("Processing data...")
 imdb['clean'] = imdb['text'].map(clean)
 imdb['clean_text'] = imdb['clean'].apply(lambda x: " ".join([str(word) for word in x]))
 
-print("Creating word clouds...")
 positive_words = " ".join(imdb[imdb.label == 1]['clean_text'].values)
 negative_words = " ".join(imdb[imdb.label == 0]['clean_text'].values)
 
