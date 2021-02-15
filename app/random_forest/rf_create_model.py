@@ -1,4 +1,3 @@
-import os
 import pickle
 import pandas as pd  # data processing, CSV file I/O (e.g. pd.read_csv)
 
@@ -20,10 +19,10 @@ a_val, a_test, b_val, b_test = \
     train_test_split(a_test, b_test, test_size=0.5, random_state=42)
 
 
-def vectorise(data, tfidf_vectorizer_fit):
+def vectorise(data, tfidf_vectorizer_fitted):
     """"Vectorise the data"""
-    tfidf = tfidf_vectorizer_fit.transform(data)
-    words = tfidf_vectorizer_fit.get_feature_names()
+    tfidf = tfidf_vectorizer_fitted.transform(data)
+    words = tfidf_vectorizer_fitted.get_feature_names()
     tfidf_df = pd.DataFrame(tfidf.toarray())
     tfidf_df.columns = words
     return tfidf_df
