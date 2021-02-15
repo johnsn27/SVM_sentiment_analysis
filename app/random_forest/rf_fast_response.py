@@ -1,5 +1,4 @@
 import pickle
-from flask import jsonify, make_response
 
 
 def fast_response(text):

@@ -5,6 +5,8 @@
       <w>datasets</w>
       <w>inits</w>
       <w>pylint</w>
+      <w>tfidf</w>
+      <w>vectorise</w>
       <w>vectorizer</w>
     </words>
   </dictionary>
