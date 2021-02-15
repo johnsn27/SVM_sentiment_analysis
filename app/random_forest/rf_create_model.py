@@ -3,6 +3,7 @@ import pandas as pd
 
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score, precision_score, recall_score
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 
@@ -18,17 +19,17 @@ def vectorise(data, tfidf_vectorizer_fitted):
 def create_model():
     dataset = pd.read_csv('../data/trainRF.csv')
 
-    sentiment = "label"
+    sentiment = 'label'
     text = 'text'
-
     features = dataset.drop(sentiment, axis=1)
     labels = dataset[sentiment]
-
 
     a_train, a_test, b_train, b_test = \
         train_test_split(features, labels, test_size=0.90, random_state=42)
     a_train, a_test, b_train, b_test = \
         train_test_split(a_train, b_train, test_size=0.5, random_state=42)
+    a_val, a_test, b_val, b_test = \
+        train_test_split(a_test, b_test, test_size=0.5, random_state=42)
 
     tfidf_vectorizer = TfidfVectorizer(min_df=5,
                                        max_df=0.8,
@@ -39,8 +40,23 @@ def create_model():
     tfidf_vectorizer_fit = tfidf_vectorizer.fit(a_train[text])
     a_train = vectorise(a_train[text], tfidf_vectorizer_fit)
 
+    a_val = vectorise(a_val[text], tfidf_vectorizer_fit)
+
     rf_classifier = RandomForestClassifier(n_estimators=100, max_depth=None)
     rf_classifier.fit(a_train, b_train.values.ravel())
 
+    predict = rf_classifier.predict(a_val)
+    accuracy = round(accuracy_score(b_val, predict), 3)
+    precision = round(precision_score(b_val, predict), 3)
+    recall = round(recall_score(b_val, predict), 3)
+
+    print('accuracy', accuracy)
+    print('precision', precision)
+    print('recall', recall)
+
     pickle.dump(a_train, open('../models/train_data_RF.sav', 'wb'))
     pickle.dump(rf_classifier, open('../models/classifierRF.sav', 'wb'))
+
+
+if __name__ == '__main__':
+    create_model()
