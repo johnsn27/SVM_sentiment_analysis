@@ -36,23 +36,6 @@ tfidf_vect = TfidfVectorizer()
 tfidf_vect_fit = tfidf_vect.fit(X_train['text'])
 X_train = vectorize(X_train['text'], tfidf_vect_fit)
 
-rf = RandomForestClassifier()
-scores = cross_val_score(rf, X_train, y_train.values.ravel(), cv=5)
-
-print(scores)
-scores.mean()
-
-rf = RandomForestClassifier()
-parameters = {
-    'n_estimators': [5, 50, 100],
-    'max_depth': [2, 10, 20, None]
-}
-
-cv = GridSearchCV(rf, parameters)
-cv.fit(X_train, y_train.values.ravel())
-
-cv.best_estimator_
-
 X_val = vectorize(X_val['text'], tfidf_vect_fit)
 
 rf2 = RandomForestClassifier(n_estimators=100, max_depth=None)
