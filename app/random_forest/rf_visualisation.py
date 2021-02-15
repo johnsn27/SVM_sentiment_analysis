@@ -4,7 +4,7 @@ import pandas as pd
 
 
 def rf_create_graph():
-    """"Creates a bar chart of the most important features"""
+    """"Creates a bar chart of the most important features """
     train_data = pickle.load(open('../models/train_data_RF.sav', 'rb'))
     classifier = pickle.load(open('../models/classifierRF.sav', 'rb'))
     feat_importances = pd.Series(classifier.feature_importances_, index=train_data.columns)
