@@ -32,7 +32,6 @@ def vectorise(data, tfidf_vectorizer_fitted):
 
 tfidf_vectorizer = TfidfVectorizer(min_df=5,
                                    max_df=0.8,
-                                   sublinear_tf=True,
                                    strip_accents='ascii',
                                    lowercase=True,
                                    use_idf=True)
