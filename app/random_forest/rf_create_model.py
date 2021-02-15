@@ -1,11 +1,13 @@
 import pickle
-import pandas as pd  # data processing, CSV file I/O (e.g. pd.read_csv)
+import pandas as pd
 
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, precision_score, recall_score
 from sklearn.feature_extraction.text import TfidfVectorizer
 
+
+# todo: refactor this so that its functional programming styled
 dataset = pd.read_csv('../data/trainRF.csv')
 
 features = dataset.drop("label", axis=1)
@@ -28,7 +30,13 @@ def vectorise(data, tfidf_vectorizer_fitted):
     return tfidf_df
 
 
-tfidf_vectorizer = TfidfVectorizer()
+tfidf_vectorizer = TfidfVectorizer(min_df=5,
+                                   max_df=0.8,
+                                   sublinear_tf=True,
+                                   strip_accents='ascii',
+                                   lowercase=True,
+                                   use_idf=True)
+
 tfidf_vectorizer_fit = tfidf_vectorizer.fit(a_train['text'])
 a_train = vectorise(a_train['text'], tfidf_vectorizer_fit)
 
@@ -41,7 +49,6 @@ b_pred = rf_classifier.predict(a_val)
 accuracy = round(accuracy_score(b_val, b_pred), 3)
 precision = round(precision_score(b_val, b_pred), 3)
 recall = round(recall_score(b_val, b_pred), 3)
-
 
 a_test = vectorise(a_test['text'], tfidf_vectorizer_fit)
 
