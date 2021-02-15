@@ -16,7 +16,20 @@ def vectorise(data, tfidf_vectorizer_fitted):
     return tfidf_df
 
 
+def test_model(rf_classifier, a_val, b_val):
+    """"Test the accuracy, precision and recall of the random forest model printing the results"""
+    predict = rf_classifier.predict(a_val)
+    accuracy = round(accuracy_score(b_val, predict), 3)
+    precision = round(precision_score(b_val, predict), 3)
+    recall = round(recall_score(b_val, predict), 3)
+
+    print('accuracy', accuracy)
+    print('precision', precision)
+    print('recall', recall)
+
+
 def create_model():
+    """Create a random forest model"""
     dataset = pd.read_csv('../data/trainRF.csv')
 
     sentiment = 'label'
@@ -45,14 +58,7 @@ def create_model():
     rf_classifier = RandomForestClassifier(n_estimators=100, max_depth=None)
     rf_classifier.fit(a_train, b_train.values.ravel())
 
-    predict = rf_classifier.predict(a_val)
-    accuracy = round(accuracy_score(b_val, predict), 3)
-    precision = round(precision_score(b_val, predict), 3)
-    recall = round(recall_score(b_val, predict), 3)
-
-    print('accuracy', accuracy)
-    print('precision', precision)
-    print('recall', recall)
+    test_model(rf_classifier, a_val, b_val)
 
     pickle.dump(a_train, open('../models/train_data_RF.sav', 'wb'))
     pickle.dump(rf_classifier, open('../models/classifierRF.sav', 'wb'))
