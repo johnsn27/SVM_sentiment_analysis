@@ -14,7 +14,6 @@ def train_model():
 
     test_data = pd.read_csv("../data/test.csv")
 
-    # Create feature vectors
     vectorizer = TfidfVectorizer(min_df=5,
                                  max_df=0.8,
                                  sublinear_tf=True,
@@ -28,6 +27,21 @@ def train_model():
     classifier_linear = RandomForestClassifier(n_estimators=200, random_state=0)
     classifier_linear.fit(train_vectors, train_data['Label'])
     prediction_linear = classifier_linear.predict(test_vectors)
+
+    def vectorize(data, tfidf_vect_fit):
+        X_tfidf = tfidf_vect_fit.transform(data)
+        words = tfidf_vect_fit.get_feature_names()
+        X_tfidf_df = pd.DataFrame(X_tfidf.toarray())
+        X_tfidf_df.columns = words
+        return (X_tfidf_df)
+
+    tfidf_vect = TfidfVectorizer()
+    tfidf_vect_fit = tfidf_vect.fit(train_data['Content'])
+    X_train = vectorize(train_data['Content'], tfidf_vect_fit)
+
+    print('X_train.columns', X_train.columns)
+    feature_importance = pd.Series(classifier_linear.feature_importances_, index=X_train.columns)
+    print('feature_importance', feature_importance)
 
     print("Results for SVC(kernel=linear)")
     report = classification_report(test_data['Label'], prediction_linear, output_dict=True)
