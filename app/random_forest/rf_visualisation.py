@@ -8,7 +8,6 @@ def rf_create_graph():
     classifier = pickle.load(open('../models/classifierRF.sav', 'rb'))
     feat_importances = pd.Series(classifier.feature_importances_, index=train_data.columns)
     feat_importances.nlargest(20).plot(kind='bar', figsize=(10, 10))
-    print(feat_importances.nlargest(20))
     plt.title("Top 20 important features")
     plt.show()
 

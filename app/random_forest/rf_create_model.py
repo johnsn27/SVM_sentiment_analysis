@@ -1,10 +1,7 @@
 import pandas as pd  # data processing, CSV file I/O (e.g. pd.read_csv)
-import nltk
 import pickle
 
-from sklearn.model_selection import GridSearchCV
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, precision_score, recall_score
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -32,27 +29,22 @@ def vectorize(data, tfidf_vect_fit):
     return (X_tfidf_df)
 
 
-tfidf_vect = TfidfVectorizer()
-tfidf_vect_fit = tfidf_vect.fit(X_train['text'])
-X_train = vectorize(X_train['text'], tfidf_vect_fit)
+tfidf_vectorizer = TfidfVectorizer()
+tfidf_vectorizer_fit = tfidf_vectorizer.fit(X_train['text'])
+X_train = vectorize(X_train['text'], tfidf_vectorizer_fit)
 
-X_val = vectorize(X_val['text'], tfidf_vect_fit)
+X_val = vectorize(X_val['text'], tfidf_vectorizer_fit)
 
-rf2 = RandomForestClassifier(n_estimators=100, max_depth=None)
-rf2.fit(X_train, y_train.values.ravel())
+rf_classifier = RandomForestClassifier(n_estimators=100, max_depth=None)
+rf_classifier.fit(X_train, y_train.values.ravel())
 
-y_pred = rf2.predict(X_val)
+y_pred = rf_classifier.predict(X_val)
 accuracy = round(accuracy_score(y_val, y_pred), 3)
 precision = round(precision_score(y_val, y_pred), 3)
 recall = round(recall_score(y_val, y_pred), 3)
-print('MAX DEPTH: {} / # OF EST: {} -- A: {} / P: {} / R: {}'.format(rf2.max_depth,
-                                                                     rf2.n_estimators,
-                                                                     accuracy,
-                                                                     precision,
-                                                                     recall))
 
-X_test = vectorize(X_test['text'], tfidf_vect_fit)
+
+X_test = vectorize(X_test['text'], tfidf_vectorizer_fit)
 
 pickle.dump(X_train, open('../models/train_data_RF.sav', 'wb'))
-pickle.dump(rf2, open('../models/classifierRF.sav', 'wb'))
-
+pickle.dump(rf_classifier, open('../models/classifierRF.sav', 'wb'))
