@@ -4,6 +4,7 @@ import pandas as pd
 
 
 def get_list_of_most_extreme_words(num):
+    """returns a list of the most extreme words"""
     train_data = pickle.load(open('../models/train_data_RF.sav', 'rb'))
     classifier = pickle.load(open('../models/classifierRF.sav', 'rb'))
     list_of_words = pd.Series(classifier.feature_importances_, index=train_data.columns)
@@ -19,6 +20,7 @@ def rf_create_graph():
 
 
 def highlight_words(text):
+    """returns the words in the text that caused the sentiment to be too extreme"""
     most_extreme_words = get_list_of_most_extreme_words(61)
     list_of_input_words = text.split(" ")
     words_to_highlight =[]
