@@ -5,8 +5,8 @@ import pandas as pd
 
 def get_list_of_most_extreme_words(num):
     """returns a list of the most extreme words"""
-    train_data = pickle.load(open('../models/train_data_RF.sav', 'rb'))
-    classifier = pickle.load(open('../models/classifierRF.sav', 'rb'))
+    train_data = pickle.load(open('../models/vectorizerRfNew.sav', 'rb'))
+    classifier = pickle.load(open('../models/classifierRFNew.sav', 'rb'))
     list_of_words = pd.Series(classifier.feature_importances_, index=train_data.columns)
     most_extreme_words = list_of_words.nlargest(num)
     return most_extreme_words.keys()
@@ -28,6 +28,7 @@ def highlight_words(text):
         for inputted_word in list_of_input_words:
             if word == inputted_word:
                 words_to_highlight.append(word)
+    print(words_to_highlight)
     return words_to_highlight
 
 

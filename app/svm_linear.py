@@ -16,10 +16,11 @@ def train_model():
 
     test_data = pd.read_csv("./datasets/fine_dataset_test.csv")
 
-
     # Create feature vectors
-    vectorizer = TfidfVectorizer(min_df=5,
-                                 max_df=0.8,
+    vectorizer = TfidfVectorizer(analyzer='word',
+                                 decode_error='strict',
+                                 min_df=3,
+                                 max_df=0.5,
                                  sublinear_tf=True,
                                  strip_accents='ascii',
                                  lowercase=True,
