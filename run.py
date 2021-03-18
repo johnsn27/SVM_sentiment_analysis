@@ -8,11 +8,14 @@ from app.gather_data.sentiment_rating import write_to_dataset
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False
 
+# dataset used: https://nlp.stanford.edu/sentiment/code.html need to reference this in paper
 
 @app.route('/sentiment', methods=['GET', 'POST'])
 def sentiment_analysis():
     """"method that outputs a response"""
     if request.method == 'GET':
+        text = request.args.get('text')
+        print(text)
         retrain_model = Thread(target=train_model)
         retrain_model.start()
         text = 'happy to the point of sadness'

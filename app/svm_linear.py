@@ -12,19 +12,21 @@ import pandas as pd
 def train_model():
     """redundant at this moment in time """
 
-    train_data = pd.read_csv("app/data/train.csv")
+    train_data = pd.read_csv("./datasets/fine_dataset_train.csv")
 
-    test_data = pd.read_csv("app/data/test.csv")
+    test_data = pd.read_csv("./datasets/fine_dataset_test.csv")
 
     # Create feature vectors
-    vectorizer = TfidfVectorizer(min_df=5,
-                                 max_df=0.8,
+    vectorizer = TfidfVectorizer(analyzer='word',
+                                 decode_error='strict',
+                                 min_df=3,
+                                 max_df=0.5,
                                  sublinear_tf=True,
                                  strip_accents='ascii',
                                  lowercase=True,
                                  use_idf=True)
 
-    train_vectors = vectorizer.fit_transform(train_data['Content'])
+    train_vectors = vectorizer.fit_transform(train_data['Content'].values.astype('U'))
     test_vectors = vectorizer.transform(test_data['Content'])
 
     # Perform classification with SVM, kernel=linear
@@ -37,6 +39,7 @@ def train_model():
     report = classification_report(test_data['Label'], prediction_linear, output_dict=True)
     print('positive: ', report['pos'])
     print('negative: ', report['neg'])
+    print('neutral: ', report['nr'])
 
     pickle.dump(vectorizer, open('models/vectorizer.sav', 'wb'))
     pickle.dump(classifier_linear, open('models/classifier.sav', 'wb'))
